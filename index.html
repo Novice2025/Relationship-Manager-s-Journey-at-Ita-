@@ -14,11 +14,13 @@
         body {
             font-family: 'Inter', sans-serif;
             margin: 0;
-            overflow: hidden; /* Hide scrollbars due to full-screen canvas */
+            /* Changed overflow to auto to allow full page scrolling */
+            overflow-y: auto;
+            overflow-x: hidden; /* Prevent horizontal scrolling */
             background-color: #0a0a0a; /* Fallback dark background */
         }
         #three-container {
-            position: fixed;
+            position: fixed; /* Keeps the 3D background static */
             top: 0;
             left: 0;
             width: 100vw;
@@ -28,19 +30,19 @@
         canvas {
             display: block;
         }
-        /* Custom scrollbar for content if it overflows */
-        .content-area::-webkit-scrollbar {
+        /* Custom scrollbar for the main body content */
+        body::-webkit-scrollbar {
             width: 8px;
         }
-        .content-area::-webkit-scrollbar-track {
+        body::-webkit-scrollbar-track {
             background: #1a1a1a;
             border-radius: 10px;
         }
-        .content-area::-webkit-scrollbar-thumb {
+        body::-webkit-scrollbar-thumb {
             background: #4a4a4a;
             border-radius: 10px;
         }
-        .content-area::-webkit-scrollbar-thumb:hover {
+        body::-webkit-scrollbar-thumb:hover {
             background: #6a6a6a;
         }
         .section-box {
@@ -84,83 +86,149 @@
     <div id="three-container"></div>
 
     <!-- Main content area -->
-    <div class="relative z-10 w-full flex flex-col items-center p-4 overflow-y-auto content-area py-12">
+    <!-- Removed h-screen from content-area to allow natural content flow and body scrolling -->
+    <div class="relative z-10 w-full flex flex-col items-center p-4 content-area py-12 min-h-screen">
         <div class="bg-gray-800 bg-opacity-70 backdrop-blur-sm rounded-xl p-8 md:p-12 shadow-2xl max-w-4xl w-full text-center border border-gray-700 mb-8">
-            <h1 class="text-4xl md:text-5xl font-bold mb-4 text-white leading-tight">The Relationship Manager's Journey at Itaú Unibanco</h1>
+            <h1 class="text-4xl md:text-5xl font-bold mb-4 text-white leading-tight">The Relationship Manager's journey at Itaú Unibanco</h1>
             <h2 class="text-2xl md:text-3xl font-semibold mb-6 text-indigo-400">guiding middle-market clients through the credit lifecycle</h2>
             <p class="text-lg md:text-xl text-gray-300 mb-8">
-                As a <strong class="text-white">Relationship Manager, Middle Market</strong> at Itaú Unibanco, my role is to serve as the primary point of contact and strategic partner for medium and large businesses. My objective is to guide them through our comprehensive credit approval process, ensuring their financial needs are met with tailored solutions while upholding Itaú's rigorous risk assessment standards. This journey involves a blend of client advocacy, financial analysis, and continuous monitoring.
+                As a <strong class="text-white">Relationship Manager, Middle Market</strong> at Itaú Unibanco, my <u class="underline">role</u> is to serve as the <u class="underline">primary point of contact</u> and strategic partner for medium and large businesses. My objective is to guide them through our <u class="underline">comprehensive</u> credit approval process, ensuring their financial needs are met with <u class="underline">tailored solutions</u> while <u class="underline">upholding</u> Itaú's <u class="underline">rigorous</u> <u class="underline">risk assessment</u> standards. This journey involves a <u class="underline">blend</u> of client <u class="underline">advocacy</u>, financial analysis, and continuous monitoring.
             </p>
+
+            <!-- Explanation of Underlined Terms -->
+            <div class="mt-8 pt-4 border-t border-gray-700 text-left">
+                <h4 class="text-xl font-semibold mb-3 text-indigo-200">Key terms explained:</h4>
+                <ul class="list-disc list-inside text-gray-300 space-y-2">
+                    <li><strong class="text-white">Role:</strong> Your specific functions and responsibilities within the bank.</li>
+                    <li><strong class="text-white">Primary point of contact:</strong> The main person clients interact with for their banking needs.</li>
+                    <li><strong class="text-white">Comprehensive:</strong> All-encompassing; covering all necessary aspects of the credit process.</li>
+                    <li><strong class="text-white">Tailored solutions:</strong> Financial products and services customized to fit individual client needs.</li>
+                    <li><strong class="text-white">Upholding:</strong> Maintaining or supporting; ensuring standards are met consistently.</li>
+                    <li><strong class="text-white">Rigorous:</strong> Extremely thorough and careful; strict and precise.</li>
+                    <li><strong class="text-white">Risk assessment:</strong> The process of identifying, evaluating, and estimating the levels of risk involved in a financial transaction.</li>
+                    <li><strong class="text-white">Blend:</strong> A mix or combination of different elements or skills.</li>
+                    <li><strong class="text-white">Advocacy:</strong> Active support of a cause or policy; representing and championing the client's needs within the bank.</li>
+                </ul>
+            </div>
         </div>
 
         <!-- Phase 1: Initial Engagement & Deep Business Understanding -->
         <div class="section-box max-w-4xl w-full">
-            <h3 class="text-3xl font-bold mb-4 text-indigo-300">Phase 1: Initial Engagement & Deep Business Understanding</h3>
+            <h3 class="text-3xl font-bold mb-4 text-indigo-300">Phase 1: Initial engagement & deep business understanding</h3>
             <p class="text-gray-300 mb-4">
-                This critical first phase is about building a strong foundation with the client. It's where I immerse myself in their world to truly grasp their operational and financial landscape.
+                This critical first phase is about building a strong foundation with the client. It's where I <u class="underline">immerse myself</u> in their world to truly <u class="underline">grasp</u> their operational and <u class="underline">financial landscape</u>.
             </p>
             <ul class="list-disc list-inside text-gray-300 space-y-2 pl-4">
                 <li>
-                    <strong class="text-white">Discovery Meeting:</strong> This is more than just an introduction; it's an in-depth conversation to understand the client's business model, current funding needs, and long-term strategic objectives.
+                    <strong class="text-white">Discovery Meeting:</strong> This is more than just an introduction; it's an <u class="underline">in-depth conversation</u> to understand the client's business model, current funding needs, and long-term strategic objectives.
                     <ul class="list-disc list-inside ml-6 text-gray-400 space-y-1">
-                        <li><strong class="text-gray-200">Business Model Dissection:</strong> I evaluate revenue streams, market positioning, competitive advantages, and the client's unique value proposition.</li>
+                        <li><strong class="text-gray-200">Business Model Dissection:</strong> I evaluate revenue streams, market positioning, competitive advantages, and the client's <u class="underline">unique value proposition</u>.</li>
                         <li><strong class="text-gray-200">Project Feasibility Screening:</strong> We identify whether the financing requirement is for immediate operational needs or a larger, long-term strategic project.</li>
-                        <li><strong class="text-gray-200">Regulatory Alignment Check:</strong> Crucially, I confirm that the client's operations comply with all relevant Brazilian financial regulations and sector-specific laws. For instance, agricultural clients are screened for <strong class="text-indigo-400">environmental embargoes</strong> to ensure no links to illegal deforestation.</li>
+                        <li><strong class="text-gray-200">Regulatory Alignment Check:</strong> Crucially, I confirm that the client's operations <u class="underline">comply with</u> all relevant Brazilian financial regulations and sector-specific laws. For instance, agricultural clients are screened for <strong class="text-indigo-400"><u class="underline">environmental embargoes</u></strong> to ensure no <u class="underline">deforestation</u> links.</li>
                     </ul>
                 </li>
                 <li>
-                    <strong class="text-white">Key Challenge:</strong> A significant hurdle here is uncovering <strong class="text-indigo-400">hidden operational risks</strong> or <strong class="text-indigo-400">undisclosed liabilities</strong>. This requires meticulous questioning, thorough document verification, and sometimes, site visits to gain a complete picture.
+                    <strong class="text-white">Key Challenge:</strong> A significant <u class="underline">hurdle</u> here is uncovering <strong class="text-indigo-400">hidden operational risks</strong> or <u class="underline">undisclosed liabilities</u>. This requires meticulous questioning, <u class="underline">thorough</u> document verification, and sometimes, site visits to gain a complete picture.
                 </li>
             </ul>
+
+            <!-- Explanation of Underlined Terms for Phase 1 -->
+            <div class="mt-8 pt-4 border-t border-gray-700 text-left">
+                <h4 class="text-xl font-semibold mb-3 text-indigo-200">Key terms explained (Phase 1):</h4>
+                <ul class="list-disc list-inside text-gray-300 space-y-2">
+                    <li><strong class="text-white">Immerse myself:</strong> To become deeply involved or absorbed in understanding the client's business.</li>
+                    <li><strong class="text-white">Grasp:</strong> To understand completely; to get a firm hold of the details.</li>
+                    <li><strong class="text-white">Financial landscape:</strong> The overall economic and financial environment in which the client operates.</li>
+                    <li><strong class="text-white">In-depth conversation:</strong> A detailed and thorough discussion to uncover all relevant information.</li>
+                    <li><strong class="text-white">Business model dissection:</strong> A detailed analysis of how a company creates, delivers, and captures value.</li>
+                    <li><strong class="text-white">Revenue streams:</strong> The various sources from which a business generates income.</li>
+                    <li><strong class="text-white">Unique value proposition:</strong> What makes a company's products or services distinct and appealing to customers.</li>
+                    <li><strong class="text-white">Feasibility Screening:</strong> Initial assessment to determine if a project or financing request is viable.</li>
+                    <li><strong class="text-white">Comply with:</strong> To act in accordance with a rule, regulation, or request.</li>
+                    <li><strong class="text-white">Environmental embargoes:</strong> Legal prohibitions or restrictions imposed due to environmental violations.</li>
+                    <li><strong class="text-white">Deforestation:</strong> The clearing of forests by cutting down or burning trees.</li>
+                    <li><strong class="text-white">Hurdle:</strong> A difficulty or obstacle.</li>
+                    <li><strong class="text-white">Undisclosed liabilities:</strong> Debts or obligations that are not openly revealed or accounted for.</li>
+                    <li><strong class="text-white">Thorough:</strong> Complete and exhaustive; careful and precise.</li>
+                </ul>
+            </div>
         </div>
 
         <!-- Phase 2: Deep-Dive Feasibility Analysis & Risk Assessment -->
         <div class="section-box max-w-4xl w-full">
-            <h3 class="text-3xl font-bold mb-4 text-indigo-300">Phase 2: Deep-Dive Feasibility Analysis & Risk Assessment</h3>
+            <h3 class="text-3xl font-bold mb-4 text-indigo-300">Phase 2: <u class="underline">Deep-dive</u> <u class="underline">feasibility</u> analysis & risk assessment</h3>
             <p class="text-gray-300 mb-4">
                 Once I have a solid understanding of the client, we move into a multi-layered assessment to evaluate their financial health and overall risk profile.
             </p>
             <ul class="list-disc list-inside text-gray-300 space-y-2 pl-4">
                 <li>
-                    <strong class="text-white">Financial Diagnostics:</strong> This involves a detailed examination of cash flow patterns, debt ratios, and collateral coverage. For <strong class="text-indigo-400">SMEs</strong>, we heavily rely on the <strong class="text-indigo-400">Five Cs framework</strong>:
+                    <strong class="text-white">Financial Diagnostics:</strong> This involves a detailed examination of cash flow patterns, debt ratios, and collateral coverage. For <strong class="text-indigo-400"><u class="underline">SMEs</u></strong>, we heavily rely on the <strong class="text-indigo-400"><u class="underline">Five Cs framework</u></strong>:
                     <ul class="list-disc list-inside ml-6 text-gray-400 space-y-1">
-                        <li><strong class="text-gray-200">Character:</strong> The borrower's integrity and track record.</li>
+                        <li><strong class="text-gray-200">Character:</strong> The borrower's integrity and <u class="underline">track record</u>.</li>
                         <li><strong class="text-gray-200">Capacity:</strong> The ability to repay based on cash flow.</li>
                         <li><strong class="text-gray-200">Capital:</strong> The owner's equity contribution to the business.</li>
                         <li><strong class="text-gray-200">Conditions:</strong> Economic and industry factors influencing the business.</li>
                         <li><strong class="text-gray-200">Collateral:</strong> Assets available to secure the loan.</li>
                     </ul>
                 </li>
-                <li><strong class="text-white">Sector-Specific Risk Mapping:</strong> I apply Itaú's internal guidelines for high-risk sectors. For example, energy clients face enhanced scrutiny under our <strong class="text-indigo-400">coal phase-out commitment</strong>, which restricts thermal coal financing by 2030.</li>
+                <li><strong class="text-white">Sector-Specific Risk Mapping:</strong> I apply Itaú's internal guidelines for high-risk sectors. For example, energy clients face <u class="underline">enhanced scrutiny</u> under our <strong class="text-indigo-400"><u class="underline">coal phase-out commitment</u></strong>, which restricts thermal coal financing by 2030.</li>
                 <li>
                     <strong class="text-white">ESG Integration:</strong> A fundamental part of our assessment involves applying the <strong class="text-indigo-400">Environmental and Social Risk Committee</strong> protocols. This ensures we evaluate:
                     <ul class="list-disc list-inside ml-6 text-gray-400 space-y-1">
                         <li><strong class="text-gray-200">Land Use Legality:</strong> Verification of compliance regarding indigenous territories and protected areas.</li>
-                        <li><strong class="text-gray-200">Climate Vulnerability:</strong> Assessing exposure to climate risks like flood zones and emissions intensity.</li>
-                        <li><strong class="text-gray-200">Labor Practices:</strong> Checking for adherence to international standards, such as <strong class="text-indigo-400">ISO 14001-certified supply chains</strong>, which demonstrates robust environmental management.</li>
+                        <li><strong class="text-gray-200">Climate Vulnerability:</strong> Assessing exposure to climate risks like <u class="underline">flood zones</u> and emissions intensity.</li>
+                        <li><strong class="text-gray-200">Labor Practices:</strong> Checking for <u class="underline">adherence</u> to international standards, such as <strong class="text-indigo-400">ISO 14001-certified supply chains</strong>, which demonstrates robust environmental management.</li>
                     </ul>
                 </li>
                 <li><strong class="text-white">Data Hurdle:</strong> A common challenge, especially with <strong class="text-indigo-400">SMEs</strong>, is the lack of formal financial records. In such cases, I may need to rely on alternative validation methods like transaction histories or supplier testimonials to build a comprehensive financial picture.</li>
             </ul>
+
+            <!-- Explanation of Underlined Terms for Phase 2 -->
+            <div class="mt-8 pt-4 border-t border-gray-700 text-left">
+                <h4 class="text-xl font-semibold mb-3 text-indigo-200">Key terms explained (Phase 2):</h4>
+                <ul class="list-disc list-inside text-gray-300 space-y-2">
+                    <li><strong class="text-white">Deep-dive:</strong> A thorough and detailed investigation or analysis.</li>
+                    <li><strong class="text-white">Feasibility:</strong> The state or degree of being easily or conveniently done; practicability.</li>
+                    <li><strong class="text-white">SMEs:</strong> Small and Medium-sized Enterprises, typically defined by number of employees, revenue, or assets.</li>
+                    <li><strong class="text-white">Framework:</strong> A basic structure underlying a system, concept, or text.</li>
+                    <li><strong class="text-white">Track record:</strong> The past achievements or failures of a person, organization, or product.</li>
+                    <li><strong class="text-white">Enhanced scrutiny:</strong> Increased or more careful examination and inspection.</li>
+                    <li><strong class="text-white">Coal phase-out commitment:</strong> An agreement to gradually stop the use of coal, often in power generation.</li>
+                    <li><strong class="text-white">Flood zones:</strong> Areas identified by flood hazard mapping where there is a risk of flooding.</li>
+                    <li><strong class="text-white">Adherence:</strong> Sticking fast to a rule, principle, or belief.</li>
+                </ul>
+            </div>
         </div>
 
         <!-- Phase 3: Loan Structuring & Terms Negotiation -->
         <div class="section-box max-w-4xl w-full">
-            <h3 class="text-3xl font-bold mb-4 text-indigo-300">Phase 3: Loan Structuring & Terms Negotiation</h3>
+            <h3 class="text-3xl font-bold mb-4 text-indigo-300">Phase 3: Loan structuring & terms negotiation</h3>
             <p class="text-gray-300 mb-4">
-                Based on the thorough assessment, I work to design a customized financial solution that aligns with the client's needs and their risk profile.
+                Based on the thorough assessment, I work to <u class="underline">design a customized financial solution</u> that aligns with the client's needs and their risk profile.
             </p>
             <ul class="list-disc list-inside text-gray-300 space-y-2 pl-4">
-                <li><strong class="text-white">Pricing Calibration:</strong> The interest rates are carefully calibrated to reflect the client's <strong class="text-indigo-400">credit risk rating</strong>, which is derived from a combination of their environmental/social scores and financial health.</li>
-                <li><strong class="text-white">Repayment Architecture:</strong> I structure repayment installments to align with the client's unique business cycles. For instance, agribusiness clients might have repayments scheduled around harvest seasons.</li>
-                <li><strong class="text-white">Specialized Programs:</strong> For qualifying <strong class="text-indigo-400">SMEs</strong> in Brazil's North/Northeast regions, I can allocate funds under our <strong class="text-indigo-400">2X SME initiatives</strong>, which specifically target women-led enterprises, reflecting Itaú's commitment to inclusive growth.</li>
+                <li><strong class="text-white">Pricing Calibration:</strong> The interest rates are carefully <u class="underline">calibrated</u> to reflect the client's <strong class="text-indigo-400">credit risk rating</strong>, which is derived from a combination of their environmental/social scores and financial health.</li>
+                <li><strong class="text-white">Repayment Architecture:</strong> I <u class="underline">structure repayment installments</u> to align with the client's unique business cycles. For instance, agribusiness clients might have repayments scheduled around <u class="underline">harvest seasons</u>.</li>
+                <li><strong class="text-white">Specialized Programs:</strong> For qualifying <strong class="text-indigo-400">SMEs</strong> in Brazil's North/Northeast regions, I can <u class="underline">allocate funds</u> under our <strong class="text-indigo-400">2X SME initiatives</strong>, which specifically target women-led enterprises, reflecting Itaú's commitment to inclusive growth.</li>
                 <li><strong class="text-white">Complex Negotiation:</strong> Balancing the client's repayment capacity with Itaú's <strong class="text-indigo-400">Risk Appetite Statement</strong> limits often requires creative solutions, such as alternative collateral arrangements or guarantees, to reach a mutually beneficial agreement.</li>
             </ul>
+
+            <!-- Explanation of Underlined Terms for Phase 3 -->
+            <div class="mt-8 pt-4 border-t border-gray-700 text-left">
+                <h4 class="text-xl font-semibold mb-3 text-indigo-200">Key terms explained (Phase 3):</h4>
+                <ul class="list-disc list-inside text-gray-300 space-y-2">
+                    <li><strong class="text-white">Design a customized financial solution:</strong> To create a financial product or service that is specifically adapted to a client's unique needs and circumstances.</li>
+                    <li><strong class="text-white">Calibrated:</strong> Precisely adjusted or measured to ensure accuracy and alignment.</li>
+                    <li><strong class="text-white">Structure repayment installments:</strong> To organize the schedule and amount of loan repayments to fit the borrower's cash flow.</li>
+                    <li><strong class="text-white">Harvest seasons:</strong> The periods when crops are gathered; refers to cyclical business income for agricultural clients.</li>
+                    <li><strong class="text-white">Allocate funds:</strong> To set aside or distribute money for a specific purpose or recipient.</li>
+                </ul>
+            </div>
 
             <!-- Gemini API Feature: Client Pitch Generator -->
             <div class="section-box mt-8 border-indigo-600 border-2 bg-gradient-to-br from-gray-900 to-gray-800">
                 <h4 class="text-2xl font-bold mb-4 text-white flex items-center justify-center">
-                    ✨ Client Pitch Generator ✨
+                    ✨ Client pitch generator ✨
                 </h4>
                 <p class="text-gray-300 mb-4 text-center">
                     Generate a tailored credit pitch for your client using AI.
@@ -193,21 +261,30 @@
 
         <!-- Phase 4: Risk Committee Review & Approval -->
         <div class="section-box max-w-4xl w-full">
-            <h3 class="text-3xl font-bold mb-4 text-indigo-300">Phase 4: Risk Committee Review & Approval</h3>
+            <h3 class="text-3xl font-bold mb-4 text-indigo-300">Phase 4: Risk committee review & approval</h3>
             <p class="text-gray-300 mb-4">
                 Once the proposal is structured, it undergoes a rigorous internal governance process to ensure compliance and mitigate risk.
             </p>
             <ul class="list-disc list-inside text-gray-300 space-y-2 pl-4">
                 <li><strong class="text-white">Pre-Committee Screening:</strong> The Risk Management (AR) team validates the proposal's compliance with Itaú's <strong class="text-indigo-400">Credit Risk Management and Control Policy</strong>.</li>
-                <li><strong class="text-white">Committee Deliberation:</strong> Cases exceeding predefined thresholds, particularly projects triggering <strong class="text-indigo-400">Equator Principles</strong> criteria (an international risk framework for project finance), require review by the <strong class="text-indigo-400">Environmental and Social Risk Committee</strong>.</li>
+                <li><strong class="text-white">Committee Deliberation:</strong> Cases exceeding <u class="underline">predefined thresholds</u>, particularly <u class="underline">projects triggering</u> <strong class="text-indigo-400">Equator Principles</strong> criteria (an international risk framework for project finance), require review by the <strong class="text-indigo-400">Environmental and Social Risk Committee</strong>.</li>
                 <li><strong class="text-white">Final Authorization:</strong> For large exposures, executive leadership within the <strong class="text-indigo-400">Sustainability Finance Committee</strong> provides final approval.</li>
-                <li><strong class="text-white">Key Rigor:</strong> Transactions in sensitive sectors, such as Amazonian meatpacking, face specific <strong class="text-indigo-400">SARB Directive No. 26</strong> audits to prevent complicity in deforestation. This demonstrates Itaú's commitment to responsible lending.</li>
+                <li><strong class="text-white">Key Rigor:</strong> Transactions in sensitive sectors, such as Amazonian meatpackers, face specific <strong class="text-indigo-400">SARB Directive No. 26</strong> audits to prevent complicity in deforestation. This demonstrates Itaú's commitment to responsible lending.</li>
             </ul>
+
+            <!-- Explanation of Underlined Terms for Phase 4 -->
+            <div class="mt-8 pt-4 border-t border-gray-700 text-left">
+                <h4 class="text-xl font-semibold mb-3 text-indigo-200">Key terms explained (Phase 4):</h4>
+                <ul class="list-disc list-inside text-gray-300 space-y-2">
+                    <li><strong class="text-white">Predefined thresholds:</strong> Specific limits or criteria that, if exceeded, require a particular action or review.</li>
+                    <li><strong class="text-white">Projects triggering:</strong> Projects that meet certain criteria, thereby activating or necessitating a specific process or framework (like the Equator Principles).</li>
+                </ul>
+            </div>
         </div>
 
         <!-- Phase 5: Post-Disbursement Monitoring & Relationship Management -->
         <div class="section-box max-w-4xl w-full">
-            <h3 class="text-3xl font-bold mb-4 text-indigo-300">Phase 5: Post-Disbursement Monitoring & Relationship Management</h3>
+            <h3 class="text-3xl font-bold mb-4 text-indigo-300">Phase 5: Post-disbursement monitoring & relationship management</h3>
             <p class="text-gray-300 mb-4">
                 My role extends well beyond the initial loan approval. Continuous monitoring and proactive engagement are crucial for the long-term health of the client relationship and the bank's portfolio.
             </p>
@@ -220,15 +297,81 @@
                         <li>Material <strong class="text-indigo-400">environmental/social incidents</strong>, such as regulatory penalties.</li>
                         <li>Macroeconomic shifts that could affect repayment capacity.</li>
                         <li>Developments in climate vulnerability impacting the client's operations.</li>
+                    <li><strong class="text-indigo-400">Flood zones:</strong> Areas identified by flood hazard mapping where there is a risk of flooding.</li>
                     </ul>
                 </li>
                 <li><strong class="text-white">Proactive Challenge:</strong> Detecting emerging risks, such as supply chain disruptions, requires constant sector intelligence and an ongoing, open dialogue with the client. My role is to be a trusted advisor, helping them navigate challenges and identify new opportunities.</li>
             </ul>
         </div>
 
+        <!-- Exercise Section -->
+        <div class="section-box max-w-4xl w-full border-green-600 border-2 bg-gradient-to-br from-gray-900 to-gray-800">
+            <h3 class="text-3xl font-bold mb-4 text-green-300 flex items-center justify-center">
+                🧠 Quick check: Your knowledge matters! 🧠
+            </h3>
+            <p class="text-gray-300 mb-4 text-center">
+                Test your understanding of a key concept from the Relationship Manager's journey.
+            </p>
+            <div class="space-y-4">
+                <div>
+                    <label for="exerciseAnswer" class="block text-gray-300 text-lg font-bold mb-2" id="questionText">
+                        <!-- Question will be inserted here by JavaScript -->
+                    </label>
+                    <input type="text" id="exerciseAnswer" class="shadow appearance-none border border-gray-700 rounded-lg w-full py-2 px-3 bg-gray-700 text-gray-200 leading-tight focus:outline-none focus:shadow-outline focus:border-green-500" placeholder="Type your answer here...">
+                </div>
+                <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 justify-center mt-4">
+                    <button id="checkAnswerBtn" class="w-full sm:w-auto bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded-lg shadow-lg transition duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-75">
+                        Check Answer
+                    </button>
+                    <button id="showAnswerBtn" class="w-full sm:w-auto bg-gray-600 hover:bg-gray-700 text-white font-semibold py-2 px-4 rounded-lg shadow-lg transition duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-opacity-75">
+                        Show Answer
+                    </button>
+                    <button id="nextQuestionBtn" class="w-full sm:w-auto bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-4 rounded-lg shadow-lg transition duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-75 hidden">
+                        Next Question
+                    </button>
+                </div>
+                <div id="exerciseFeedback" class="mt-4 p-3 bg-gray-700 border border-gray-600 rounded-lg text-gray-200 text-center hidden">
+                    <!-- Feedback message will appear here -->
+                </div>
+                <div id="correctAnswerDisplay" class="mt-4 p-3 bg-gray-700 border border-gray-600 rounded-lg text-gray-200 text-center hidden">
+                    <!-- Correct answer will appear here -->
+                </div>
+            </div>
+        </div>
+
+        <!-- New Vocabulary Fill-in-the-Blanks Exercise Section -->
+        <div class="section-box max-w-4xl w-full border-purple-600 border-2 bg-gradient-to-br from-gray-900 to-gray-800 mt-8">
+            <h3 class="text-3xl font-bold mb-4 text-purple-300 flex items-center justify-center">
+                📝 Vocabulary check: Fill in the blank 📝
+            </h3>
+            <p class="text-gray-300 mb-4 text-center">
+                Fill in the missing word in the sentence below.
+            </p>
+            <div class="space-y-4">
+                <div>
+                    <label for="vocabularyAnswer" class="block text-gray-300 text-lg font-bold mb-2">
+                        My objective is to guide them through our <span class="text-yellow-400">__________</span> credit approval process, ensuring their financial needs are met with tailored solutions while upholding Itaú's rigorous risk assessment standards.
+                    </label>
+                    <input type="text" id="vocabularyAnswer" class="shadow appearance-none border border-gray-700 rounded-lg w-full py-2 px-3 bg-gray-700 text-gray-200 leading-tight focus:outline-none focus:shadow-outline focus:border-purple-500" placeholder="Type the missing word...">
+                </div>
+                <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 justify-center mt-4">
+                    <button id="checkVocabularyBtn" class="w-full sm:w-auto bg-purple-600 hover:bg-purple-700 text-white font-semibold py-2 px-4 rounded-lg shadow-lg transition duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-opacity-75">
+                        Check Answer
+                    </button>
+                    <button id="showVocabularyAnswerBtn" class="w-full sm:w-auto bg-gray-600 hover:bg-gray-700 text-white font-semibold py-2 px-4 rounded-lg shadow-lg transition duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-opacity-75">
+                        Show Answer
+                    </button>
+                </div>
+                <div id="vocabularyFeedback" class="mt-4 p-3 bg-gray-700 border border-gray-600 rounded-lg text-gray-200 text-center hidden">
+                    <!-- Feedback message will appear here -->
+                </div>
+            </div>
+        </div>
+
+
         <!-- Critical Terms & Concepts -->
         <div class="section-box max-w-4xl w-full">
-            <h3 class="text-3xl font-bold mb-4 text-indigo-300">Critical Terms & Concepts for the Relationship Manager</h3>
+            <h3 class="text-3xl font-bold mb-4 text-indigo-300">Critical terms & concepts for the relationship manager</h3>
             <table class="custom-table text-gray-300 rounded-lg overflow-hidden">
                 <thead>
                     <tr>
@@ -408,6 +551,8 @@
             init();
             animate();
             setupGeminiFeature(); // Setup the Gemini API feature after the page loads
+            setupExerciseFeature(); // Setup the main quiz exercise feature
+            setupVocabularyExercise(); // Setup the new vocabulary exercise
         };
 
         // --- Gemini API Feature Logic ---
@@ -469,6 +614,161 @@
                 } finally {
                     loadingIndicator.classList.add('hidden');
                 }
+            });
+        }
+
+        // --- Extended Exercise Feature Logic (Multiple Choice Quiz) ---
+        function setupExerciseFeature() {
+            const questionTextElement = document.getElementById('questionText');
+            const exerciseAnswerInput = document.getElementById('exerciseAnswer');
+            const checkAnswerBtn = document.getElementById('checkAnswerBtn');
+            const showAnswerBtn = document.getElementById('showAnswerBtn');
+            const nextQuestionBtn = document.getElementById('nextQuestionBtn');
+            const exerciseFeedback = document.getElementById('exerciseFeedback');
+            const correctAnswerDisplay = document.getElementById('correctAnswerDisplay');
+
+            let currentQuestionIndex = 0;
+            const questions = [
+                {
+                    question: 'What are the "Five Cs" primarily used to assess for SMEs in the credit approval process?',
+                    answer: 'creditworthiness'
+                },
+                {
+                    question: 'Which specific group of enterprises do Itaú\'s "2X SME initiatives" target?',
+                    answer: 'women-led'
+                },
+                {
+                    question: 'Name one key area that the Environmental and Social Risk Committee protocols evaluate during ESG integration.',
+                    answer: 'land use legality' // or 'climate vulnerability' or 'labor practices'
+                },
+                {
+                    question: 'In Phase 1, what does the Relationship Manager "immerse myself" in to understand the client\'s world?',
+                    answer: 'client\'s world' // or 'their world'
+                },
+                {
+                    question: 'What kind of conversation is the Discovery Meeting in Phase 1?',
+                    answer: 'in-depth'
+                },
+                {
+                    question: 'What is evaluated during "Business Model Dissection" in Phase 1 (e.g., revenue streams, market positioning, competitive advantages, or unique value proposition)?',
+                    answer: 'revenue streams' // or 'market positioning', 'competitive advantages', 'unique value proposition'
+                },
+                {
+                    question: 'What is a "hurdle" in the context of uncovering hidden operational risks?',
+                    answer: 'difficulty' // or 'obstacle'
+                },
+                {
+                    question: 'In Phase 3, what action is taken to align interest rates with a client\'s credit risk rating?',
+                    answer: 'calibrated'
+                },
+                {
+                    question: 'For agribusiness clients, repayment installments might be structured around which specific periods?',
+                    answer: 'harvest seasons'
+                },
+                {
+                    question: 'In Phase 4, cases exceeding what require review by the Environmental and Social Risk Committee?',
+                    answer: 'predefined thresholds'
+                }
+            ];
+
+            function displayQuestion() {
+                if (currentQuestionIndex < questions.length) {
+                    const q = questions[currentQuestionIndex];
+                    questionTextElement.textContent = `Question ${currentQuestionIndex + 1}/${questions.length}: ${q.question}`;
+                    exerciseAnswerInput.value = '';
+                    exerciseFeedback.classList.add('hidden');
+                    correctAnswerDisplay.classList.add('hidden');
+                    nextQuestionBtn.classList.add('hidden'); // Hide next button until answer is checked
+                    checkAnswerBtn.classList.remove('hidden'); // Ensure check button is visible
+                    showAnswerBtn.classList.remove('hidden'); // Ensure show button is visible
+                    exerciseAnswerInput.disabled = false; // Enable input
+                } else {
+                    questionTextElement.textContent = 'Quiz complete! You\'ve answered all the questions.';
+                    exerciseAnswerInput.classList.add('hidden');
+                    checkAnswerBtn.classList.add('hidden');
+                    showAnswerBtn.classList.add('hidden');
+                    nextQuestionBtn.classList.add('hidden');
+                    exerciseFeedback.classList.remove('hidden');
+                    exerciseFeedback.textContent = 'Congratulations on completing the quiz!';
+                    exerciseFeedback.className = 'mt-4 p-3 bg-indigo-800 border border-indigo-600 rounded-lg text-indigo-200 text-center';
+                    correctAnswerDisplay.classList.add('hidden');
+                }
+            }
+
+            checkAnswerBtn.addEventListener('click', () => {
+                const userAnswer = exerciseAnswerInput.value.trim().toLowerCase();
+                const q = questions[currentQuestionIndex];
+                exerciseFeedback.classList.remove('hidden');
+                correctAnswerDisplay.classList.add('hidden'); // Hide correct answer if shown
+
+                if (q.answer.toLowerCase().includes(userAnswer) && userAnswer.length > 0) { // Basic check for partial match if answer is a phrase
+                    exerciseFeedback.textContent = "Correct! Well done!";
+                    exerciseFeedback.className = 'mt-4 p-3 bg-green-800 border border-green-600 rounded-lg text-green-200 text-center';
+                    nextQuestionBtn.classList.remove('hidden'); // Show next button
+                    exerciseAnswerInput.disabled = true; // Disable input after correct answer
+                    checkAnswerBtn.classList.add('hidden'); // Hide check button after correct answer
+                    showAnswerBtn.classList.add('hidden'); // Hide show answer button
+                } else {
+                    exerciseFeedback.textContent = "That's not quite right. Please try again or show answer!";
+                    exerciseFeedback.className = 'mt-4 p-3 bg-red-800 border border-red-600 rounded-lg text-red-200 text-center';
+                    nextQuestionBtn.classList.add('hidden'); // Keep next button hidden
+                }
+            });
+
+            showAnswerBtn.addEventListener('click', () => {
+                const q = questions[currentQuestionIndex];
+                correctAnswerDisplay.textContent = `The correct answer is: ${q.answer}.`;
+                correctAnswerDisplay.classList.remove('hidden');
+                exerciseFeedback.classList.add('hidden'); // Hide feedback if shown
+                correctAnswerDisplay.className = 'mt-4 p-3 bg-gray-700 border border-gray-600 rounded-lg text-gray-200 text-center';
+                nextQuestionBtn.classList.remove('hidden'); // Allow to move to next question
+                exerciseAnswerInput.disabled = true; // Disable input
+                checkAnswerBtn.classList.add('hidden'); // Hide check button
+                showAnswerBtn.classList.add('hidden'); // Hide show answer button
+            });
+
+            nextQuestionBtn.addEventListener('click', () => {
+                currentQuestionIndex++;
+                displayQuestion();
+            });
+
+            // Initialize the first question on setup
+            displayQuestion();
+        }
+
+        // --- New Vocabulary Fill-in-the-Blanks Exercise Logic ---
+        function setupVocabularyExercise() {
+            const vocabularyAnswerInput = document.getElementById('vocabularyAnswer');
+            const checkVocabularyBtn = document.getElementById('checkVocabularyBtn');
+            const showVocabularyAnswerBtn = document.getElementById('showVocabularyAnswerBtn');
+            const vocabularyFeedback = document.getElementById('vocabularyFeedback');
+
+            const correctAnswer = "comprehensive"; // The expected answer for the fill-in-the-blank
+
+            checkVocabularyBtn.addEventListener('click', () => {
+                const userAnswer = vocabularyAnswerInput.value.trim().toLowerCase();
+                vocabularyFeedback.classList.remove('hidden');
+                vocabularyFeedback.textContent = ''; // Clear previous feedback
+
+                if (userAnswer === correctAnswer) {
+                    vocabularyFeedback.textContent = "Correct! You got it!";
+                    vocabularyFeedback.className = 'mt-4 p-3 bg-green-800 border border-green-600 rounded-lg text-green-200 text-center';
+                    vocabularyAnswerInput.disabled = true; // Disable input after correct answer
+                    checkVocabularyBtn.classList.add('hidden'); // Hide check button
+                    showVocabularyAnswerBtn.classList.add('hidden'); // Hide show answer button
+                } else {
+                    vocabularyFeedback.textContent = "Not quite. Try again!";
+                    vocabularyFeedback.className = 'mt-4 p-3 bg-red-800 border border-red-600 rounded-lg text-red-200 text-center';
+                }
+            });
+
+            showVocabularyAnswerBtn.addEventListener('click', () => {
+                vocabularyFeedback.classList.remove('hidden');
+                vocabularyFeedback.textContent = `The correct word is: "${correctAnswer}".`;
+                vocabularyFeedback.className = 'mt-4 p-3 bg-gray-700 border border-gray-600 rounded-lg text-gray-200 text-center';
+                vocabularyAnswerInput.disabled = true; // Disable input after showing answer
+                checkVocabularyBtn.classList.add('hidden'); // Hide check button
+                showVocabularyAnswerBtn.classList.add('hidden'); // Hide show answer button
             });
         }
     </script>
