@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Relationship Manager's Journey at Itaú Unibanco</title>
+    <!-- Tailwind CSS CDN for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts - Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- Three.js CDN for 3D rendering -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            overflow: hidden; /* Hide scrollbars due to full-screen canvas */
+            background-color: #0a0a0a; /* Fallback dark background */
+        }
+        #three-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1; /* Place behind content */
+        }
+        canvas {
+            display: block;
+        }
+        /* Custom scrollbar for content if it overflows */
+        .content-area::-webkit-scrollbar {
+            width: 8px;
+        }
+        .content-area::-webkit-scrollbar-track {
+            background: #1a1a1a;
+            border-radius: 10px;
+        }
+        .content-area::-webkit-scrollbar-thumb {
+            background: #4a4a4a;
+            border-radius: 10px;
+        }
+        .content-area::-webkit-scrollbar-thumb:hover {
+            background: #6a6a6a;
+        }
+        .section-box {
+            background-color: #1a1a1a; /* Darker background for boxes */
+            background-opacity: 0.6; /* Slightly less opaque */
+            backdrop-filter: blur(6px); /* Stronger blur for differentiation */
+            border: 1px solid #2d2d2d; /* Subtle border */
+            border-radius: 0.75rem; /* Rounded corners */
+            padding: 1.5rem; /* Padding inside boxes */
+            margin-bottom: 1.5rem; /* Space between boxes */
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* Subtle shadow */
+        }
+        /* Styling for the table */
+        .custom-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+        .custom-table th, .custom-table td {
+            border: 1px solid #333;
+            padding: 0.75rem;
+            text-align: left;
+        }
+        .custom-table th {
+            background-color: #2a2a2a;
+            font-weight: 600;
+            color: #ccc;
+        }
+        .custom-table td {
+            background-color: #1a1a1a;
+            color: #bbb;
+        }
+        .custom-table tr:nth-child(even) td {
+            background-color: #1f1f1f;
+        }
+    </style>
+</head>
+<body class="text-gray-100 antialiased">
+
+    <!-- Container for the Three.js canvas -->
+    <div id="three-container"></div>
+
+    <!-- Main content area -->
+    <div class="relative z-10 w-full flex flex-col items-center p-4 overflow-y-auto content-area py-12">
+        <div class="bg-gray-800 bg-opacity-70 backdrop-blur-sm rounded-xl p-8 md:p-12 shadow-2xl max-w-4xl w-full text-center border border-gray-700 mb-8">
+            <h1 class="text-4xl md:text-5xl font-bold mb-4 text-white leading-tight">The Relationship Manager's Journey at Itaú Unibanco</h1>
+            <h2 class="text-2xl md:text-3xl font-semibold mb-6 text-indigo-400">guiding middle-market clients through the credit lifecycle</h2>
+            <p class="text-lg md:text-xl text-gray-300 mb-8">
+                As a <strong class="text-white">Relationship Manager, Middle Market</strong> at Itaú Unibanco, my role is to serve as the primary point of contact and strategic partner for medium and large businesses. My objective is to guide them through our comprehensive credit approval process, ensuring their financial needs are met with tailored solutions while upholding Itaú's rigorous risk assessment standards. This journey involves a blend of client advocacy, financial analysis, and continuous monitoring.
+            </p>
+        </div>
+
+        <!-- Phase 1: Initial Engagement & Deep Business Understanding -->
+        <div class="section-box max-w-4xl w-full">
+            <h3 class="text-3xl font-bold mb-4 text-indigo-300">Phase 1: Initial Engagement & Deep Business Understanding</h3>
+            <p class="text-gray-300 mb-4">
+                This critical first phase is about building a strong foundation with the client. It's where I immerse myself in their world to truly grasp their operational and financial landscape.
+            </p>
+            <ul class="list-disc list-inside text-gray-300 space-y-2 pl-4">
+                <li>
+                    <strong class="text-white">Discovery Meeting:</strong> This is more than just an introduction; it's an in-depth conversation to understand the client's business model, current funding needs, and long-term strategic objectives.
+                    <ul class="list-disc list-inside ml-6 text-gray-400 space-y-1">
+                        <li><strong class="text-gray-200">Business Model Dissection:</strong> I evaluate revenue streams, market positioning, competitive advantages, and the client's unique value proposition.</li>
+                        <li><strong class="text-gray-200">Project Feasibility Screening:</strong> We identify whether the financing requirement is for immediate operational needs or a larger, long-term strategic project.</li>
+                        <li><strong class="text-gray-200">Regulatory Alignment Check:</strong> Crucially, I confirm that the client's operations comply with all relevant Brazilian financial regulations and sector-specific laws. For instance, agricultural clients are screened for <strong class="text-indigo-400">environmental embargoes</strong> to ensure no links to illegal deforestation.</li>
+                    </ul>
+                </li>
+                <li>
+                    <strong class="text-white">Key Challenge:</strong> A significant hurdle here is uncovering <strong class="text-indigo-400">hidden operational risks</strong> or <strong class="text-indigo-400">undisclosed liabilities</strong>. This requires meticulous questioning, thorough document verification, and sometimes, site visits to gain a complete picture.
+                </li>
+            </ul>
+        </div>
+
+        <!-- Phase 2: Deep-Dive Feasibility Analysis & Risk Assessment -->
+        <div class="section-box max-w-4xl w-full">
+            <h3 class="text-3xl font-bold mb-4 text-indigo-300">Phase 2: Deep-Dive Feasibility Analysis & Risk Assessment</h3>
+            <p class="text-gray-300 mb-4">
+                Once I have a solid understanding of the client, we move into a multi-layered assessment to evaluate their financial health and overall risk profile.
+            </p>
+            <ul class="list-disc list-inside text-gray-300 space-y-2 pl-4">
+                <li>
+                    <strong class="text-white">Financial Diagnostics:</strong> This involves a detailed examination of cash flow patterns, debt ratios, and collateral coverage. For <strong class="text-indigo-400">SMEs</strong>, we heavily rely on the <strong class="text-indigo-400">Five Cs framework</strong>:
+                    <ul class="list-disc list-inside ml-6 text-gray-400 space-y-1">
+                        <li><strong class="text-gray-200">Character:</strong> The borrower's integrity and track record.</li>
+                        <li><strong class="text-gray-200">Capacity:</strong> The ability to repay based on cash flow.</li>
+                        <li><strong class="text-gray-200">Capital:</strong> The owner's equity contribution to the business.</li>
+                        <li><strong class="text-gray-200">Conditions:</strong> Economic and industry factors influencing the business.</li>
+                        <li><strong class="text-gray-200">Collateral:</strong> Assets available to secure the loan.</li>
+                    </ul>
+                </li>
+                <li><strong class="text-white">Sector-Specific Risk Mapping:</strong> I apply Itaú's internal guidelines for high-risk sectors. For example, energy clients face enhanced scrutiny under our <strong class="text-indigo-400">coal phase-out commitment</strong>, which restricts thermal coal financing by 2030.</li>
+                <li>
+                    <strong class="text-white">ESG Integration:</strong> A fundamental part of our assessment involves applying the <strong class="text-indigo-400">Environmental and Social Risk Committee</strong> protocols. This ensures we evaluate:
+                    <ul class="list-disc list-inside ml-6 text-gray-400 space-y-1">
+                        <li><strong class="text-gray-200">Land Use Legality:</strong> Verification of compliance regarding indigenous territories and protected areas.</li>
+                        <li><strong class="text-gray-200">Climate Vulnerability:</strong> Assessing exposure to climate risks like flood zones and emissions intensity.</li>
+                        <li><strong class="text-gray-200">Labor Practices:</strong> Checking for adherence to international standards, such as <strong class="text-indigo-400">ISO 14001-certified supply chains</strong>, which demonstrates robust environmental management.</li>
+                    </ul>
+                </li>
+                <li><strong class="text-white">Data Hurdle:</strong> A common challenge, especially with <strong class="text-indigo-400">SMEs</strong>, is the lack of formal financial records. In such cases, I may need to rely on alternative validation methods like transaction histories or supplier testimonials to build a comprehensive financial picture.</li>
+            </ul>
+        </div>
+
+        <!-- Phase 3: Loan Structuring & Terms Negotiation -->
+        <div class="section-box max-w-4xl w-full">
+            <h3 class="text-3xl font-bold mb-4 text-indigo-300">Phase 3: Loan Structuring & Terms Negotiation</h3>
+            <p class="text-gray-300 mb-4">
+                Based on the thorough assessment, I work to design a customized financial solution that aligns with the client's needs and their risk profile.
+            </p>
+            <ul class="list-disc list-inside text-gray-300 space-y-2 pl-4">
+                <li><strong class="text-white">Pricing Calibration:</strong> The interest rates are carefully calibrated to reflect the client's <strong class="text-indigo-400">credit risk rating</strong>, which is derived from a combination of their environmental/social scores and financial health.</li>
+                <li><strong class="text-white">Repayment Architecture:</strong> I structure repayment installments to align with the client's unique business cycles. For instance, agribusiness clients might have repayments scheduled around harvest seasons.</li>
+                <li><strong class="text-white">Specialized Programs:</strong> For qualifying <strong class="text-indigo-400">SMEs</strong> in Brazil's North/Northeast regions, I can allocate funds under our <strong class="text-indigo-400">2X SME initiatives</strong>, which specifically target women-led enterprises, reflecting Itaú's commitment to inclusive growth.</li>
+                <li><strong class="text-white">Complex Negotiation:</strong> Balancing the client's repayment capacity with Itaú's <strong class="text-indigo-400">Risk Appetite Statement</strong> limits often requires creative solutions, such as alternative collateral arrangements or guarantees, to reach a mutually beneficial agreement.</li>
+            </ul>
+
+            <!-- Gemini API Feature: Client Pitch Generator -->
+            <div class="section-box mt-8 border-indigo-600 border-2 bg-gradient-to-br from-gray-900 to-gray-800">
+                <h4 class="text-2xl font-bold mb-4 text-white flex items-center justify-center">
+                    ✨ Client Pitch Generator ✨
+                </h4>
+                <p class="text-gray-300 mb-4 text-center">
+                    Generate a tailored credit pitch for your client using AI.
+                </p>
+                <div class="space-y-4">
+                    <div>
+                        <label for="businessType" class="block text-gray-300 text-sm font-bold mb-2">
+                            Client Business Type:
+                        </label>
+                        <input type="text" id="businessType" class="shadow appearance-none border border-gray-700 rounded-lg w-full py-2 px-3 bg-gray-700 text-gray-200 leading-tight focus:outline-none focus:shadow-outline focus:border-indigo-500" placeholder="e.g., Textile Manufacturer, Agricultural Exporter">
+                    </div>
+                    <div>
+                        <label for="financingNeed" class="block text-gray-300 text-sm font-bold mb-2">
+                            Financing Need:
+                        </label>
+                        <input type="text" id="financingNeed" class="shadow appearance-none border border-gray-700 rounded-lg w-full py-2 px-3 bg-gray-700 text-gray-200 leading-tight focus:outline-none focus:shadow-outline focus:border-indigo-500" placeholder="e.g., Expansion Capital, Working Capital, Equipment Purchase">
+                    </div>
+                    <button id="generatePitchBtn" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-4 rounded-lg shadow-lg transition duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-75 flex items-center justify-center">
+                        Generate Pitch <span class="ml-2">✨</span>
+                    </button>
+                    <div id="loadingIndicator" class="hidden text-center text-indigo-400 mt-4">
+                        Generating... Please wait.
+                    </div>
+                    <div id="pitchOutput" class="mt-6 p-4 bg-gray-700 border border-gray-600 rounded-lg text-gray-200 whitespace-pre-wrap hidden">
+                        <!-- Generated pitch will appear here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Phase 4: Risk Committee Review & Approval -->
+        <div class="section-box max-w-4xl w-full">
+            <h3 class="text-3xl font-bold mb-4 text-indigo-300">Phase 4: Risk Committee Review & Approval</h3>
+            <p class="text-gray-300 mb-4">
+                Once the proposal is structured, it undergoes a rigorous internal governance process to ensure compliance and mitigate risk.
+            </p>
+            <ul class="list-disc list-inside text-gray-300 space-y-2 pl-4">
+                <li><strong class="text-white">Pre-Committee Screening:</strong> The Risk Management (AR) team validates the proposal's compliance with Itaú's <strong class="text-indigo-400">Credit Risk Management and Control Policy</strong>.</li>
+                <li><strong class="text-white">Committee Deliberation:</strong> Cases exceeding predefined thresholds, particularly projects triggering <strong class="text-indigo-400">Equator Principles</strong> criteria (an international risk framework for project finance), require review by the <strong class="text-indigo-400">Environmental and Social Risk Committee</strong>.</li>
+                <li><strong class="text-white">Final Authorization:</strong> For large exposures, executive leadership within the <strong class="text-indigo-400">Sustainability Finance Committee</strong> provides final approval.</li>
+                <li><strong class="text-white">Key Rigor:</strong> Transactions in sensitive sectors, such as Amazonian meatpacking, face specific <strong class="text-indigo-400">SARB Directive No. 26</strong> audits to prevent complicity in deforestation. This demonstrates Itaú's commitment to responsible lending.</li>
+            </ul>
+        </div>
+
+        <!-- Phase 5: Post-Disbursement Monitoring & Relationship Management -->
+        <div class="section-box max-w-4xl w-full">
+            <h3 class="text-3xl font-bold mb-4 text-indigo-300">Phase 5: Post-Disbursement Monitoring & Relationship Management</h3>
+            <p class="text-gray-300 mb-4">
+                My role extends well beyond the initial loan approval. Continuous monitoring and proactive engagement are crucial for the long-term health of the client relationship and the bank's portfolio.
+            </p>
+            <ul class="list-disc list-inside text-gray-300 space-y-2 pl-4">
+                <li><strong class="text-white">Portfolio Surveillance:</strong> I continuously track covenant compliance through regular (e.g., quarterly) financial disclosures from the client.</li>
+                <li><strong class="text-white">Early-Warning Triggers:</strong> Automated alerts are deployed to notify me of payment delays or any ESG incidents that might impact the client's risk profile.</li>
+                <li>
+                    <strong class="text-white">Dynamic Reassessment:</strong> I proactively adjust risk ratings based on:
+                    <ul class="list-disc list-inside ml-6 text-gray-400 space-y-1">
+                        <li>Material <strong class="text-indigo-400">environmental/social incidents</strong>, such as regulatory penalties.</li>
+                        <li>Macroeconomic shifts that could affect repayment capacity.</li>
+                        <li>Developments in climate vulnerability impacting the client's operations.</li>
+                    </ul>
+                </li>
+                <li><strong class="text-white">Proactive Challenge:</strong> Detecting emerging risks, such as supply chain disruptions, requires constant sector intelligence and an ongoing, open dialogue with the client. My role is to be a trusted advisor, helping them navigate challenges and identify new opportunities.</li>
+            </ul>
+        </div>
+
+        <!-- Critical Terms & Concepts -->
+        <div class="section-box max-w-4xl w-full">
+            <h3 class="text-3xl font-bold mb-4 text-indigo-300">Critical Terms & Concepts for the Relationship Manager</h3>
+            <table class="custom-table text-gray-300 rounded-lg overflow-hidden">
+                <thead>
+                    <tr>
+                        <th class="py-3 px-4">Term</th>
+                        <th class="py-3 px-4">Definition</th>
+                        <th class="py-3 px-4">Relevance</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="py-2 px-4"><strong class="text-white">Equator Principles</strong></td>
+                        <td class="py-2 px-4">International risk management framework for project finance.</td>
+                        <td class="py-2 px-4">Mandatory for qualifying infrastructure and energy deals, reflecting global best practices.</td>
+                    </tr>
+                    <tr>
+                        <td class="py-2 px-4"><strong class="text-white">Five Cs of Credit</strong></td>
+                        <td class="py-2 px-4">Character, Capacity, Capital, Conditions, Collateral.</td>
+                        <td class="py-2 px-4">Core methodology for assessing the creditworthiness of <strong class="text-indigo-400">SMEs</strong>.</td>
+                    </tr>
+                    <tr>
+                        <td class="py-2 px-4"><strong class="text-white">2X SMEs</strong></td>
+                        <td class="py-2 px-4">Initiatives targeting women-owned/led enterprises.</td>
+                        <td class="py-2 px-4">A priority segment for Itaú, receiving significant funding allocation to promote diversity.</td>
+                    </tr>
+                    <tr>
+                        <td class="py-2 px-4"><strong class="text-white">SARB Directive No. 26</strong></td>
+                        <td class="py-2 px-4">Anti-deforestation rules for Amazon meatpackers.</td>
+                        <td class="py-2 px-4">Sector-specific compliance requirement, ensuring responsible sourcing.</td>
+                    </tr>
+                    <tr>
+                        <td class="py-2 px-4"><strong class="text-white">ISO 14001</strong></td>
+                        <td class="py-2 px-4">Environmental management certification.</td>
+                        <td class="py-2 px-4">Validates robust operational ESG controls within a client's supply chain.</td>
+                    </tr>
+                    <tr>
+                        <td class="py-2 px-4"><strong class="text-white">Credit Risk Rating</strong></td>
+                        <td class="py-2 px-4">An assessment of the likelihood that a borrower will default.</td>
+                        <td class="py-2 px-4">Directly impacts interest rate calibration and loan terms.</td>
+                    </tr>
+                    <tr>
+                        <td class="py-2 px-4"><strong class="text-white">Risk Appetite Statement</strong></td>
+                        <td class="py-2 px-4">Defines the level of risk Itaú is willing to take to achieve its objectives.</td>
+                        <td class="py-2 px-4">Guides loan structuring and negotiation, ensuring alignment with bank policy.</td>
+                    </tr>
+                    <tr>
+                        <td class="py-2 px-4"><strong class="text-white">Environmental Embargoes</strong></td>
+                        <td class="py-2 px-4">Legal restrictions on activities due to environmental non-compliance.</td>
+                        <td class="py-2 px-4">Critical for agricultural clients, preventing links to illegal deforestation.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Conclusion -->
+        <div class="bg-gray-800 bg-opacity-70 backdrop-blur-sm rounded-xl p-8 md:p-12 shadow-2xl max-w-4xl w-full text-center border border-gray-700 mt-8">
+            <p class="text-lg md:text-xl text-gray-300">
+                This end-to-end process embodies Itaú's dual mandate: enabling economic growth through accessible credit while enforcing rigorous <strong class="text-indigo-400">environmental, social, and climate risk governance</strong>. The most rewarding aspect of my role is structuring solutions that empower middle-market clients—like a women-owned textile producer in Bahia securing expansion capital through our 2X program—while meticulously maintaining the bank's risk discipline. Continuous monitoring remains paramount, as shifting market dynamics or client vulnerabilities can rapidly alter risk profiles, demanding constant vigilance and adaptive strategies.
+            </p>
+        </div>
+
+    </div>
+
+    <script>
+        // Three.js variables
+        let scene, camera, renderer;
+        let mouseX = 0, mouseY = 0;
+        let targetX = 0, targetY = 0;
+        const windowHalfX = window.innerWidth / 2;
+        const windowHalfY = window.innerHeight / 2;
+        let particles; // To hold the particle system
+
+        // Initialize the Three.js scene
+        function init() {
+            const container = document.getElementById('three-container');
+
+            // Scene setup: A dark, elegant atmosphere
+            scene = new THREE.Scene();
+            scene.background = new THREE.Color(0x0a0a0a); // Very dark gray/black
+
+            // Camera setup
+            camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            camera.position.z = 100; // Position camera further back
+
+            // Renderer setup
+            renderer = new THREE.WebGLRenderer({ antialias: true });
+            renderer.setPixelRatio(window.devicePixelRatio);
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            container.appendChild(renderer.domElement);
+
+            // Add subtle lights
+            const ambientLight = new THREE.AmbientLight(0x404040); // Soft white light
+            scene.add(ambientLight);
+            const pointLight = new THREE.PointLight(0xffffff, 1, 1000);
+            pointLight.position.set(0, 0, 100);
+            scene.add(pointLight);
+
+            // Create a particle system for the elegant dark background
+            const particleCount = 1500;
+            const geometry = new THREE.BufferGeometry();
+            const positions = new Float32Array(particleCount * 3);
+            const colors = new Float32Array(particleCount * 3);
+
+            const color = new THREE.Color();
+
+            for (let i = 0; i < particleCount; i++) {
+                // Position particles randomly in a cube
+                positions[i * 3] = (Math.random() * 2 - 1) * 500;
+                positions[i * 3 + 1] = (Math.random() * 2 - 1) * 500;
+                positions[i * 3 + 2] = (Math.random() * 2 - 1) * 500;
+
+                // Assign random dark, subtle colors (e.g., shades of blue, purple, gray)
+                const hue = Math.random() * 0.1 + 0.6; // Blue to purple range
+                const saturation = 0.5;
+                const lightness = Math.random() * 0.1 + 0.1; // Dark shades
+                color.setHSL(hue, saturation, lightness);
+
+                colors[i * 3] = color.r;
+                colors[i * 3 + 1] = color.g;
+                colors[i * 3 + 2] = color.b;
+            }
+
+            geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+            geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+
+            // Use PointsMaterial for the particles
+            const material = new THREE.PointsMaterial({
+                size: 1.5, // Small particle size
+                vertexColors: true, // Use vertex colors
+                blending: THREE.AdditiveBlending, // For glowing effect
+                transparent: true,
+                opacity: 0.8
+            });
+
+            particles = new THREE.Points(geometry, material);
+            scene.add(particles);
+
+            // Event listeners for interactivity
+            document.addEventListener('mousemove', onDocumentMouseMove);
+            window.addEventListener('resize', onWindowResize);
+        }
+
+        // Handle mouse movement for camera control
+        function onDocumentMouseMove(event) {
+            mouseX = (event.clientX - windowHalfX);
+            mouseY = (event.clientY - windowHalfY);
+        }
+
+        // Handle window resizing
+        function onWindowResize() {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        }
+
+        // Animation loop
+        function animate() {
+            requestAnimationFrame(animate);
+
+            // Move camera slightly based on mouse position
+            targetX = mouseX * 0.001;
+            targetY = mouseY * 0.001;
+
+            camera.rotation.y += 0.05 * (targetX - camera.rotation.y);
+            camera.rotation.x += 0.05 * (targetY - camera.rotation.x);
+
+            // Rotate particles slowly for a subtle dynamic effect
+            if (particles) {
+                particles.rotation.x += 0.0005;
+                particles.rotation.y += 0.0008;
+            }
+
+            renderer.render(scene, camera);
+        }
+
+        // Start the animation on window load.
+        window.onload = function () {
+            init();
+            animate();
+            setupGeminiFeature(); // Setup the Gemini API feature after the page loads
+        };
+
+        // --- Gemini API Feature Logic ---
+        function setupGeminiFeature() {
+            const generatePitchBtn = document.getElementById('generatePitchBtn');
+            const businessTypeInput = document.getElementById('businessType');
+            const financingNeedInput = document.getElementById('financingNeed');
+            const pitchOutput = document.getElementById('pitchOutput');
+            const loadingIndicator = document.getElementById('loadingIndicator');
+
+            generatePitchBtn.addEventListener('click', async () => {
+                const businessType = businessTypeInput.value.trim();
+                const financingNeed = financingNeedInput.value.trim();
+
+                if (!businessType || !financingNeed) {
+                    pitchOutput.textContent = "Please enter both business type and financing need.";
+                    pitchOutput.classList.remove('hidden');
+                    return;
+                }
+
+                loadingIndicator.classList.remove('hidden');
+                pitchOutput.classList.add('hidden');
+                pitchOutput.textContent = ''; // Clear previous output
+
+                const prompt = `As a Relationship Manager at Itaú Unibanco, generate a concise and compelling credit pitch for a client.
+                Client Business Type: ${businessType}.
+                Financing Need: ${financingNeed}.
+                The pitch should highlight how Itaú can meet this need, emphasizing our comprehensive approach to risk assessment and tailored financial solutions, and potentially mentioning relevant programs like '2X SME initiatives' if applicable. Focus on Itaú's dual mandate of economic growth and responsible governance. Keep it professional and persuasive.`;
+
+                try {
+                    let chatHistory = [];
+                    chatHistory.push({ role: "user", parts: [{ text: prompt }] });
+                    const payload = { contents: chatHistory };
+                    const apiKey = ""; // Canvas will automatically provide this in runtime
+                    const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+
+                    const response = await fetch(apiUrl, {
+                                method: 'POST',
+                                headers: { 'Content-Type': 'application/json' },
+                                body: JSON.stringify(payload)
+                            });
+
+                    const result = await response.json();
+
+                    if (result.candidates && result.candidates.length > 0 &&
+                        result.candidates[0].content && result.candidates[0].content.parts &&
+                        result.candidates[0].content.parts.length > 0) {
+                        const text = result.candidates[0].content.parts[0].text;
+                        pitchOutput.textContent = text;
+                        pitchOutput.classList.remove('hidden');
+                    } else {
+                        pitchOutput.textContent = "Failed to generate pitch. Please try again.";
+                        pitchOutput.classList.remove('hidden');
+                    }
+                } catch (error) {
+                    console.error("Error calling Gemini API:", error);
+                    pitchOutput.textContent = "An error occurred while generating the pitch. Please check the console for details.";
+                    pitchOutput.classList.remove('hidden');
+                } finally {
+                    loadingIndicator.classList.add('hidden');
+                }
+            });
+        }
+    </script>
+</body>
+</html>
