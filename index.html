@@ -78,6 +78,53 @@
         .custom-table tr:nth-child(even) td {
             background-color: #1f1f1f;
         }
+        .clickable-term {
+            cursor: pointer;
+            text-decoration: underline;
+            color: #818cf8; /* Indigo 400 for consistency */
+            margin: 0.25rem 0.5rem;
+            display: inline-block;
+            transition: color 0.2s ease-in-out;
+        }
+        .clickable-term:hover {
+            color: #a78bfa; /* Indigo 300 on hover */
+        }
+        /* Styling for the new Top Picks selection */
+        .term-selection-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #2a2a2a;
+            border-radius: 0.5rem;
+            padding: 0.75rem 1rem;
+            margin-bottom: 0.5rem;
+            border: 1px solid #4a4a4a;
+        }
+        .term-selection-item button {
+            padding: 0.25rem 0.75rem;
+            border-radius: 0.375rem;
+            font-size: 0.875rem;
+            font-weight: 600;
+            transition: background-color 0.2s ease-in-out;
+        }
+        .select-btn {
+            background-color: #4CAF50; /* Green */
+            color: white;
+        }
+        .select-btn:hover {
+            background-color: #45a049;
+        }
+        .remove-btn {
+            background-color: #F44336; /* Red */
+            color: white;
+        }
+        .remove-btn:hover {
+            background-color: #da190b;
+        }
+        .select-btn:disabled, .remove-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
     </style>
 </head>
 <body class="text-gray-100 antialiased">
@@ -86,7 +133,6 @@
     <div id="three-container"></div>
 
     <!-- Main content area -->
-    <!-- Removed h-screen from content-area to allow natural content flow and body scrolling -->
     <div class="relative z-10 w-full flex flex-col items-center p-4 content-area py-12 min-h-screen">
         <div class="bg-gray-800 bg-opacity-70 backdrop-blur-sm rounded-xl p-8 md:p-12 shadow-2xl max-w-4xl w-full text-center border border-gray-700 mb-8">
             <h1 class="text-4xl md:text-5xl font-bold mb-4 text-white leading-tight">The Relationship Manager's journey at Itaú Unibanco</h1>
@@ -142,7 +188,7 @@
                     <li><strong class="text-white">In-depth conversation:</strong> A detailed and thorough discussion to uncover all relevant information.</li>
                     <li><strong class="text-white">Business model dissection:</strong> A detailed analysis of how a company creates, delivers, and captures value.</li>
                     <li><strong class="text-white">Revenue streams:</strong> The various sources from which a business generates income.</li>
-                    <li><strong class="text-white">Unique value proposition:</strong> What makes a company's products or services distinct and appealing to customers.</li>
+                    <li><strong class="text-white">Unique value proposition:</b> What makes a company's products or services distinct and appealing to customers.</li>
                     <li><strong class="text-white">Feasibility Screening:</strong> Initial assessment to determine if a project or financing request is viable.</li>
                     <li><strong class="text-white">Comply with:</strong> To act in accordance with a rule, regulation, or request.</li>
                     <li><strong class="text-white">Environmental embargoes:</strong> Legal prohibitions or restrictions imposed due to environmental violations.</li>
@@ -219,7 +265,7 @@
                 <ul class="list-disc list-inside text-gray-300 space-y-2">
                     <li><strong class="text-white">Design a customized financial solution:</strong> To create a financial product or service that is specifically adapted to a client's unique needs and circumstances.</li>
                     <li><strong class="text-white">Calibrated:</strong> Precisely adjusted or measured to ensure accuracy and alignment.</li>
-                    <li><strong class="text-white">Structure repayment installments:</strong> To organize the schedule and amount of loan repayments to fit the borrower's cash flow.</li>
+                    <li><strong class="text-white">Structure repayment installments:</b> To organize the schedule and amount of loan repayments to fit the borrower's cash flow.</li>
                     <li><strong class="text-white">Harvest seasons:</strong> The periods when crops are gathered; refers to cyclical business income for agricultural clients.</li>
                     <li><strong class="text-white">Allocate funds:</strong> To set aside or distribute money for a specific purpose or recipient.</li>
                 </ul>
@@ -349,8 +395,8 @@
             </p>
             <div class="space-y-4">
                 <div>
-                    <label for="vocabularyAnswer" class="block text-gray-300 text-lg font-bold mb-2">
-                        My objective is to guide them through our <span class="text-yellow-400">__________</span> credit approval process, ensuring their financial needs are met with tailored solutions while upholding Itaú's rigorous risk assessment standards.
+                    <label for="vocabularyAnswer" class="block text-gray-300 text-lg font-bold mb-2" id="vocabularyQuestionText">
+                        <!-- Vocabulary question will be inserted here by JavaScript -->
                     </label>
                     <input type="text" id="vocabularyAnswer" class="shadow appearance-none border border-gray-700 rounded-lg w-full py-2 px-3 bg-gray-700 text-gray-200 leading-tight focus:outline-none focus:shadow-outline focus:border-purple-500" placeholder="Type the missing word...">
                 </div>
@@ -361,6 +407,9 @@
                     <button id="showVocabularyAnswerBtn" class="w-full sm:w-auto bg-gray-600 hover:bg-gray-700 text-white font-semibold py-2 px-4 rounded-lg shadow-lg transition duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-opacity-75">
                         Show Answer
                     </button>
+                    <button id="nextVocabularyQuestionBtn" class="w-full sm:w-auto bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-4 rounded-lg shadow-lg transition duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-75 hidden">
+                        Next Question
+                    </button>
                 </div>
                 <div id="vocabularyFeedback" class="mt-4 p-3 bg-gray-700 border border-gray-600 rounded-lg text-gray-200 text-center hidden">
                     <!-- Feedback message will appear here -->
@@ -368,68 +417,95 @@
             </div>
         </div>
 
-
-        <!-- Critical Terms & Concepts -->
-        <div class="section-box max-w-4xl w-full">
-            <h3 class="text-3xl font-bold mb-4 text-indigo-300">Critical terms & concepts for the relationship manager</h3>
-            <table class="custom-table text-gray-300 rounded-lg overflow-hidden">
-                <thead>
-                    <tr>
-                        <th class="py-3 px-4">Term</th>
-                        <th class="py-3 px-4">Definition</th>
-                        <th class="py-3 px-4">Relevance</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td class="py-2 px-4"><strong class="text-white">Equator Principles</strong></td>
-                        <td class="py-2 px-4">International risk management framework for project finance.</td>
-                        <td class="py-2 px-4">Mandatory for qualifying infrastructure and energy deals, reflecting global best practices.</td>
-                    </tr>
-                    <tr>
-                        <td class="py-2 px-4"><strong class="text-white">Five Cs of Credit</strong></td>
-                        <td class="py-2 px-4">Character, Capacity, Capital, Conditions, Collateral.</td>
-                        <td class="py-2 px-4">Core methodology for assessing the creditworthiness of <strong class="text-indigo-400">SMEs</strong>.</td>
-                    </tr>
-                    <tr>
-                        <td class="py-2 px-4"><strong class="text-white">2X SMEs</strong></td>
-                        <td class="py-2 px-4">Initiatives targeting women-owned/led enterprises.</td>
-                        <td class="py-2 px-4">A priority segment for Itaú, receiving significant funding allocation to promote diversity.</td>
-                    </tr>
-                    <tr>
-                        <td class="py-2 px-4"><strong class="text-white">SARB Directive No. 26</strong></td>
-                        <td class="py-2 px-4">Anti-deforestation rules for Amazon meatpackers.</td>
-                        <td class="py-2 px-4">Sector-specific compliance requirement, ensuring responsible sourcing.</td>
-                    </tr>
-                    <tr>
-                        <td class="py-2 px-4"><strong class="text-white">ISO 14001</strong></td>
-                        <td class="py-2 px-4">Environmental management certification.</td>
-                        <td class="py-2 px-4">Validates robust operational ESG controls within a client's supply chain.</td>
-                    </tr>
-                    <tr>
-                        <td class="py-2 px-4"><strong class="text-white">Credit Risk Rating</strong></td>
-                        <td class="py-2 px-4">An assessment of the likelihood that a borrower will default.</td>
-                        <td class="py-2 px-4">Directly impacts interest rate calibration and loan terms.</td>
-                    </tr>
-                    <tr>
-                        <td class="py-2 px-4"><strong class="text-white">Risk Appetite Statement</strong></td>
-                        <td class="py-2 px-4">Defines the level of risk Itaú is willing to take to achieve its objectives.</td>
-                        <td class="py-2 px-4">Guides loan structuring and negotiation, ensuring alignment with bank policy.</td>
-                    </tr>
-                    <tr>
-                        <td class="py-2 px-4"><strong class="text-white">Environmental Embargoes</strong></td>
-                        <td class="py-2 px-4">Legal restrictions on activities due to environmental non-compliance.</td>
-                        <td class="py-2 px-4">Critical for agricultural clients, preventing links to illegal deforestation.</td>
-                    </tr>
-                </tbody>
-            </table>
+        <!-- My Top 10 Appreciated Terms -->
+        <div class="section-box max-w-4xl w-full border-blue-600 border-2 bg-gradient-to-br from-gray-900 to-gray-800 mt-8">
+            <h3 class="text-3xl font-bold mb-4 text-blue-300 flex items-center justify-center">
+                ❤️ my Top 10 Appreciated Terms from This Journey ❤️
+            </h3>
+            <p class="text-gray-300 mb-4 text-center">
+                Here are 10 terms from this lesson that I find particularly insightful or important.
+            </p>
+            <ul class="list-disc list-inside text-gray-300 space-y-2 pl-4 text-left">
+                <li><strong class="text-white">Risk assessment:</strong> Understanding the inherent dangers in financial transactions.</li>
+                <li><strong class="text-white">Tailored solutions:</strong> The ability to customize offerings to fit specific client needs.</li>
+                <li><strong class="text-white">ESG Integration:</strong> Incorporating environmental, social, and governance factors into decision-making.</li>
+                <li><strong class="text-white">Five Cs of Credit:</strong> The fundamental framework for evaluating creditworthiness.</li>
+                <li><strong class="text-white">Equator Principles:</strong> The international benchmark for managing environmental and social risks in project finance.</li>
+                <li><strong class="text-white">2X SME initiatives:</strong> Highlighting a commitment to inclusive growth by supporting women-led businesses.</li>
+                <li><strong class="text-white">Proactive Challenge:</strong> The ongoing effort to anticipate and address emerging risks.</li>
+                <li><strong class="text-white">Portfolio Surveillance:</strong> Continuous monitoring to maintain the health of client relationships and the bank's assets.</li>
+                <li><strong class="text-white">Comprehensive:</strong> Emphasizing the all-encompassing nature of the credit approval process.</li>
+                <li><strong class="text-white">Regulatory Alignment Check:</strong> Ensuring operations adhere to legal and ethical standards.</li>
+            </ul>
         </div>
 
-        <!-- Conclusion -->
-        <div class="bg-gray-800 bg-opacity-70 backdrop-blur-sm rounded-xl p-8 md:p-12 shadow-2xl max-w-4xl w-full text-center border border-gray-700 mt-8">
-            <p class="text-lg md:text-xl text-gray-300">
-                This end-to-end process embodies Itaú's dual mandate: enabling economic growth through accessible credit while enforcing rigorous <strong class="text-indigo-400">environmental, social, and climate risk governance</strong>. The most rewarding aspect of my role is structuring solutions that empower middle-market clients—like a women-owned textile producer in Bahia securing expansion capital through our 2X program—while meticulously maintaining the bank's risk discipline. Continuous monitoring remains paramount, as shifting market dynamics or client vulnerabilities can rapidly alter risk profiles, demanding constant vigilance and adaptive strategies.
+        <!-- Interactive Vocabulary: Click to Learn! -->
+        <div class="section-box max-w-4xl w-full border-teal-600 border-2 bg-gradient-to-br from-gray-900 to-gray-800 mt-8">
+            <h3 class="text-3xl font-bold mb-4 text-teal-300 flex items-center justify-center">
+                ✨ Interactive Vocabulary: Click to Learn! ✨
+            </h3>
+            <p class="text-gray-300 mb-4 text-center">
+                Click on any term below to reveal its definition.
             </p>
+            <div class="flex flex-wrap justify-center mb-6">
+                <span class="clickable-term" data-term="Role" data-definition="Your specific functions and responsibilities within the bank.">Role</span>
+                <span class="clickable-term" data-term="Primary point of contact" data-definition="The main person clients interact with for their banking needs.">Primary point of contact</span>
+                <span class="clickable-term" data-term="Comprehensive" data-definition="All-encompassing; covering all necessary aspects of the credit process.">Comprehensive</span>
+                <span class="clickable-term" data-term="Tailored solutions" data-definition="Financial products and services customized to fit individual client needs.">Tailored solutions</span>
+                <span class="clickable-term" data-term="Rigorous" data-definition="Extremely thorough and careful; strict and precise.">Rigorous</span>
+                <span class="clickable-term" data-term="Risk assessment" data-definition="The process of identifying, evaluating, and estimating the levels of risk involved in a financial transaction.">Risk assessment</span>
+                <span class="clickable-term" data-term="Advocacy" data-definition="Active support of a cause or policy; representing and championing the client's needs within the bank.">Advocacy</span>
+                <span class="clickable-term" data-term="Immerse myself" data-definition="To become deeply involved or absorbed in understanding the client's business.">Immerse myself</span>
+                <span class="clickable-term" data-term="Grasp" data-definition="To understand completely; to get a firm hold of the details.">Grasp</span>
+                <span class="clickable-term" data-term="Financial landscape" data-definition="The overall economic and financial environment in which the client operates.">Financial landscape</span>
+                <span class="clickable-term" data-term="In-depth conversation" data-definition="A detailed and thorough discussion to uncover all relevant information.">In-depth conversation</span>
+                <span class="clickable-term" data-term="Business model dissection" data-definition="A detailed analysis of how a company creates, delivers, and captures value.">Business model dissection</span>
+                <span class="clickable-term" data-term="Revenue streams" data-definition="The various sources from which a business generates income.">Revenue streams</span>
+                <span class="clickable-term" data-term="Unique value proposition" data-definition="What makes a company's products or services distinct and appealing to customers.">Unique value proposition</span>
+                <span class="clickable-term" data-term="Feasibility Screening" data-definition="Initial assessment to determine if a project or financing request is viable.">Feasibility Screening</span>
+                <span class="clickable-term" data-term="Comply with" data-definition="To act in accordance with a rule, regulation, or request.">Comply with</span>
+                <span class="clickable-term" data-term="Environmental embargoes" data-definition="Legal prohibitions or restrictions imposed due to environmental violations.">Environmental embargoes</span>
+                <span class="clickable-term" data-term="Deforestation" data-definition="The clearing of forests by cutting down or burning trees.">Deforestation</span>
+                <span class="clickable-term" data-term="Hurdle" data-definition="A difficulty or obstacle.">Hurdle</span>
+                <span class="clickable-term" data-term="Undisclosed liabilities" data-definition="Debts or obligations that are not openly revealed or accounted for.">Undisclosed liabilities</span>
+                <span class="clickable-term" data-term="Thorough" data-definition="Complete and exhaustive; careful and precise.">Thorough</span>
+                <span class="clickable-term" data-term="Deep-dive" data-definition="A thorough and detailed investigation or analysis.">Deep-dive</span>
+                <span class="clickable-term" data-term="SMEs" data-definition="Small and Medium-sized Enterprises.">SMEs</span>
+                <span class="clickable-term" data-term="Five Cs framework" data-definition="Character, Capacity, Capital, Conditions, Collateral - core for assessing creditworthiness.">Five Cs framework</span>
+                <span class="clickable-term" data-term="Enhanced scrutiny" data-definition="Increased or more careful examination and inspection.">Enhanced scrutiny</span>
+                <span class="clickable-term" data-term="Coal phase-out commitment" data-definition="An agreement to gradually stop the use of coal, often in power generation.">Coal phase-out commitment.">Coal phase-out commitment</span>
+                <span class="clickable-term" data-term="Flood zones" data-definition="Areas identified by flood hazard mapping where there is a risk of flooding.">Flood zones</span>
+                <span class="clickable-term" data-term="Adherence" data-definition="Sticking fast to a rule, principle, or belief.">Adherence</span>
+                <span class="clickable-term" data-term="Calibrated" data-definition="Precisely adjusted or measured to ensure accuracy and alignment.">Calibrated</span>
+                <span class="clickable-term" data-term="Harvest seasons" data-definition="Periods when crops are gathered; refers to cyclical business income for agricultural clients.">Harvest seasons</span>
+                <span class="clickable-term" data-term="Allocate funds" data-definition="To set aside or distribute money for a specific purpose or recipient.">Allocate funds</span>
+                <span class="clickable-term" data-term="Equator Principles" data-definition="International risk management framework for project finance.">Equator Principles</span>
+            </div>
+            <div id="termDefinitionDisplay" class="mt-4 p-3 bg-gray-700 border border-gray-600 rounded-lg text-gray-200 text-center hidden">
+                <!-- Definition will appear here -->
+            </div>
+        </div>
+
+        <!-- Select Your Top 10 Picks Section -->
+        <div class="section-box max-w-4xl w-full border-pink-600 border-2 bg-gradient-to-br from-gray-900 to-gray-800 mt-8">
+            <h3 class="text-3xl font-bold mb-4 text-pink-300 flex items-center justify-center">
+                ⭐ Select Your Top 10 Picks! ⭐
+            </h3>
+            <p class="text-gray-300 mb-4 text-center">
+                Choose up to 10 terms that you find most important or interesting.
+            </p>
+            <div id="topPicksTermsContainer" class="flex flex-wrap justify-center gap-2 mb-6 max-h-60 overflow-y-auto p-2 rounded-lg bg-gray-700 border border-gray-600">
+                <!-- Selectable terms will be dynamically added here -->
+            </div>
+
+            <div id="topPicksFeedback" class="text-center text-pink-400 mb-4 hidden">
+                <!-- Feedback messages will appear here -->
+            </div>
+
+            <h4 class="text-xl font-bold mb-3 text-pink-200 text-center">Your Current Top Picks: (<span id="topPicksCount">0</span>/10)</h4>
+            <div id="selectedTopPicksDisplay" class="space-y-2 p-2 rounded-lg bg-gray-700 border border-gray-600 min-h-[5rem]">
+                <!-- Selected terms will be displayed here -->
+            </div>
         </div>
 
     </div>
@@ -553,6 +629,8 @@
             setupGeminiFeature(); // Setup the Gemini API feature after the page loads
             setupExerciseFeature(); // Setup the main quiz exercise feature
             setupVocabularyExercise(); // Setup the new vocabulary exercise
+            setupClickableTerms(); // Setup the original clickable terms exercise
+            setupTopPicksSelection(); // Setup the new Top Picks selection feature
         };
 
         // --- Gemini API Feature Logic ---
@@ -617,7 +695,7 @@
             });
         }
 
-        // --- Extended Exercise Feature Logic (Multiple Choice Quiz) ---
+        // --- Quick Check Quiz Logic ---
         function setupExerciseFeature() {
             const questionTextElement = document.getElementById('questionText');
             const exerciseAnswerInput = document.getElementById('exerciseAnswer');
@@ -736,40 +814,309 @@
             displayQuestion();
         }
 
-        // --- New Vocabulary Fill-in-the-Blanks Exercise Logic ---
+        // --- Vocabulary Fill-in-the-Blanks Exercise Logic ---
         function setupVocabularyExercise() {
+            const vocabularyQuestionTextElement = document.getElementById('vocabularyQuestionText');
             const vocabularyAnswerInput = document.getElementById('vocabularyAnswer');
             const checkVocabularyBtn = document.getElementById('checkVocabularyBtn');
             const showVocabularyAnswerBtn = document.getElementById('showVocabularyAnswerBtn');
+            const nextVocabularyQuestionBtn = document.getElementById('nextVocabularyQuestionBtn');
             const vocabularyFeedback = document.getElementById('vocabularyFeedback');
 
-            const correctAnswer = "comprehensive"; // The expected answer for the fill-in-the-blank
+            let currentVocabQuestionIndex = 0;
+            const vocabularyQuestions = [
+                {
+                    sentence: 'My objective is to guide them through our <span class="text-yellow-400">__________</span> credit approval process, ensuring their financial needs are met with tailored solutions while upholding Itaú\'s rigorous risk assessment standards.',
+                    answer: 'comprehensive'
+                },
+                {
+                    sentence: 'In Phase 1, I <span class="text-yellow-400">__________</span> myself in their world to truly grasp their operational and financial landscape.',
+                    answer: 'immerse'
+                },
+                {
+                    sentence: 'A significant <span class="text-yellow-400">__________</span> in Phase 1 is uncovering hidden operational risks or undisclosed liabilities.',
+                    answer: 'hurdle'
+                },
+                {
+                    sentence: 'In Phase 2, energy clients face <span class="text-yellow-400">__________</span> scrutiny under our coal phase-out commitment.',
+                    answer: 'enhanced'
+                },
+                {
+                    sentence: 'The five C\'s framework includes Character, Capacity, Capital, Conditions, and <span class="text-yellow-400">__________</span>.',
+                    answer: 'collateral'
+                },
+                {
+                    sentence: 'In Phase 3, repayment installments are structured to align with the client\'s unique business <span class="text-yellow-400">__________</span>.',
+                    answer: 'cycles'
+                },
+                {
+                    sentence: 'Itaú\'s "2X SME initiatives" specifically target <span class="text-yellow-400">__________</span>-led enterprises.',
+                    answer: 'women'
+                },
+                {
+                    sentence: 'In Phase 4, cases exceeding <span class="text-yellow-400">__________</span> thresholds require review by the Environmental and Social Risk Committee.',
+                    answer: 'predefined'
+                },
+                {
+                    sentence: 'Transactions in sensitive sectors like Amazonian meatpackers face specific SARB Directive No. 26 <span class="text-yellow-400">__________</span> to prevent complicity in deforestation.',
+                    answer: 'audits'
+                },
+                {
+                    sentence: 'In Phase 5, automated <span class="text-yellow-400">__________</span> are deployed to notify me of payment delays or ESG incidents.',
+                    answer: 'alerts'
+                }
+            ];
+
+            function displayVocabQuestion() {
+                if (currentVocabQuestionIndex < vocabularyQuestions.length) {
+                    const q = vocabularyQuestions[currentVocabQuestionIndex];
+                    vocabularyQuestionTextElement.innerHTML = `Question ${currentVocabQuestionIndex + 1}/${vocabularyQuestions.length}: ${q.sentence}`;
+                    vocabularyAnswerInput.value = '';
+                    vocabularyFeedback.classList.add('hidden');
+                    vocabularyAnswerInput.disabled = false;
+                    checkVocabularyBtn.classList.remove('hidden');
+                    showVocabularyAnswerBtn.classList.remove('hidden');
+                    nextVocabularyQuestionBtn.classList.add('hidden'); // Hide next button initially
+                } else {
+                    vocabularyQuestionTextElement.textContent = 'Vocabulary quiz complete! You\'ve answered all the questions.';
+                    vocabularyAnswerInput.classList.add('hidden');
+                    checkVocabularyBtn.classList.add('hidden');
+                    showVocabularyAnswerBtn.classList.add('hidden');
+                    nextVocabularyQuestionBtn.classList.add('hidden');
+                    vocabularyFeedback.classList.remove('hidden');
+                    vocabularyFeedback.textContent = 'Great job completing the vocabulary exercise!';
+                    vocabularyFeedback.className = 'mt-4 p-3 bg-indigo-800 border border-indigo-600 rounded-lg text-indigo-200 text-center';
+                }
+            }
 
             checkVocabularyBtn.addEventListener('click', () => {
                 const userAnswer = vocabularyAnswerInput.value.trim().toLowerCase();
+                const q = vocabularyQuestions[currentVocabQuestionIndex];
                 vocabularyFeedback.classList.remove('hidden');
-                vocabularyFeedback.textContent = ''; // Clear previous feedback
 
-                if (userAnswer === correctAnswer) {
+                if (userAnswer === q.answer.toLowerCase()) {
                     vocabularyFeedback.textContent = "Correct! You got it!";
                     vocabularyFeedback.className = 'mt-4 p-3 bg-green-800 border border-green-600 rounded-lg text-green-200 text-center';
-                    vocabularyAnswerInput.disabled = true; // Disable input after correct answer
-                    checkVocabularyBtn.classList.add('hidden'); // Hide check button
-                    showVocabularyAnswerBtn.classList.add('hidden'); // Hide show answer button
+                    vocabularyAnswerInput.disabled = true;
+                    checkVocabularyBtn.classList.add('hidden');
+                    showVocabularyAnswerBtn.classList.add('hidden');
+                    nextVocabularyQuestionBtn.classList.remove('hidden'); // Show next button after correct answer
                 } else {
                     vocabularyFeedback.textContent = "Not quite. Try again!";
                     vocabularyFeedback.className = 'mt-4 p-3 bg-red-800 border border-red-600 rounded-lg text-red-200 text-center';
+                    nextVocabularyQuestionBtn.classList.add('hidden'); // Keep next button hidden
                 }
             });
 
             showVocabularyAnswerBtn.addEventListener('click', () => {
+                const q = vocabularyQuestions[currentVocabQuestionIndex];
                 vocabularyFeedback.classList.remove('hidden');
-                vocabularyFeedback.textContent = `The correct word is: "${correctAnswer}".`;
+                vocabularyFeedback.textContent = `The correct word is: "${q.answer}".`;
                 vocabularyFeedback.className = 'mt-4 p-3 bg-gray-700 border border-gray-600 rounded-lg text-gray-200 text-center';
-                vocabularyAnswerInput.disabled = true; // Disable input after showing answer
-                checkVocabularyBtn.classList.add('hidden'); // Hide check button
-                showVocabularyAnswerBtn.classList.add('hidden'); // Hide show answer button
+                vocabularyAnswerInput.disabled = true;
+                checkVocabularyBtn.classList.add('hidden');
+                showVocabularyAnswerBtn.classList.add('hidden');
+                nextVocabularyQuestionBtn.classList.remove('hidden'); // Show next button after showing answer
             });
+
+            nextVocabularyQuestionBtn.addEventListener('click', () => {
+                currentVocabQuestionIndex++;
+                displayVocabQuestion();
+            });
+
+            // Initialize the first vocabulary question on setup
+            displayVocabQuestion();
+        }
+
+        // --- Interactive Vocabulary: Click to Learn! Logic ---
+        function setupClickableTerms() {
+            const clickableTerms = document.querySelectorAll('.clickable-term');
+            const termDefinitionDisplay = document.getElementById('termDefinitionDisplay');
+
+            clickableTerms.forEach(termElement => {
+                termElement.addEventListener('click', () => {
+                    const term = termElement.dataset.term;
+                    const definition = termElement.dataset.definition;
+                    termDefinitionDisplay.textContent = `"${term}": ${definition}`;
+                    termDefinitionDisplay.classList.remove('hidden');
+                });
+            });
+        }
+
+        // --- Select Your Top 10 Picks! Logic ---
+        function setupTopPicksSelection() {
+            const topPicksTermsContainer = document.getElementById('topPicksTermsContainer');
+            const selectedTopPicksDisplay = document.getElementById('selectedTopPicksDisplay');
+            const topPicksFeedback = document.getElementById('topPicksFeedback');
+            const topPicksCountElement = document.getElementById('topPicksCount');
+
+            const allTermsData = [
+                { term: "Role", definition: "Your specific functions and responsibilities within the bank." },
+                { term: "Primary point of contact", definition: "The main person clients interact with for their banking needs." },
+                { term: "Comprehensive", definition: "All-encompassing; covering all necessary aspects of the credit process." },
+                { term: "Tailored solutions", definition: "Financial products and services customized to fit individual client needs." },
+                { term: "Upholding", definition: "Maintaining or supporting; ensuring standards are met consistently." },
+                { term: "Rigorous", definition: "Extremely thorough and careful; strict and precise." },
+                { term: "Risk assessment", definition: "The process of identifying, evaluating, and estimating the levels of risk involved in a financial transaction." },
+                { term: "Blend", definition: "A mix or combination of different elements or skills." },
+                { term: "Advocacy", definition: "Active support of a cause or policy; representing and championing the client's needs within the bank." },
+                { term: "Immerse myself", definition: "To become deeply involved or absorbed in understanding the client's business." },
+                { term: "Grasp", definition: "To understand completely; to get a firm hold of the details." },
+                { term: "Financial landscape", definition: "The overall economic and financial environment in which the client operates." },
+                { term: "In-depth conversation", definition: "A detailed and thorough discussion to uncover all relevant information." },
+                { term: "Business model dissection", definition: "A detailed analysis of how a company creates, delivers, and captures value." },
+                { term: "Revenue streams", definition: "The various sources from which a business generates income." },
+                { term: "Unique value proposition", definition: "What makes a company's products or services distinct and appealing to customers." },
+                { term: "Feasibility Screening", definition: "Initial assessment to determine if a project or financing request is viable." },
+                { term: "Comply with", definition: "To act in accordance with a rule, regulation, or request." },
+                { term: "Environmental embargoes", definition: "Legal prohibitions or restrictions imposed due to environmental violations." },
+                { term: "Deforestation", definition: "The clearing of forests by cutting down or burning trees." },
+                { term: "Hurdle", definition: "A difficulty or obstacle." },
+                { term: "Undisclosed liabilities", definition: "Debts or obligations that are not openly revealed or accounted for." },
+                { term: "Thorough", definition: "Complete and exhaustive; careful and precise." },
+                { term: "Deep-dive", definition: "A thorough and detailed investigation or analysis." },
+                { term: "Feasibility", definition: "The state or degree of being easily or conveniently done; practicability." },
+                { term: "SMEs", definition: "Small and Medium-sized Enterprises." },
+                { term: "Five Cs framework", definition: "Character, Capacity, Capital, Conditions, Collateral - core for assessing creditworthiness." },
+                { term: "Track record", definition: "The past achievements or failures of a person, organization, or product." },
+                { term: "Enhanced scrutiny", definition: "Increased or more careful examination and inspection." },
+                { term: "Coal phase-out commitment", definition: "An agreement to gradually stop the use of coal, often in power generation." },
+                { term: "Flood zones", definition: "Areas identified by flood hazard mapping where there is a risk of flooding." },
+                { term: "Adherence", definition: "Sticking fast to a rule, principle, or belief." },
+                { term: "Design a customized financial solution", definition: "To create a financial product or service that is specifically adapted to a client's unique needs and circumstances." },
+                { term: "Calibrated", definition: "Precisely adjusted or measured to ensure accuracy and alignment." },
+                { term: "Structure repayment installments", definition: "To organize the schedule and amount of loan repayments to fit the borrower's cash flow." },
+                { term: "Harvest seasons", definition: "The periods when crops are gathered; refers to cyclical business income for agricultural clients." },
+                { term: "Allocate funds", definition: "To set aside or distribute money for a specific purpose or recipient." },
+                { term: "Predefined thresholds", definition: "Specific limits or criteria that, if exceeded, require a particular action or review." },
+                { term: "Projects triggering", definition: "Projects that meet certain criteria, thereby activating or necessitating a specific process or framework." },
+                { term: "Equator Principles", definition: "International risk management framework for project finance." },
+                { term: "Portfolio Surveillance", definition: "Continuous tracking of covenant compliance through regular financial disclosures from the client." },
+                { term: "Early-Warning Triggers", definition: "Automated alerts deployed to notify of payment delays or ESG incidents." },
+                { term: "Dynamic Reassessment", definition: "Proactively adjusting risk ratings based on new information or events." },
+                { term: "Proactive Challenge", definition: "Detecting emerging risks through constant sector intelligence and client dialogue." }
+            ];
+
+            const selectedTopPicks = new Set(); // Using a Set for efficient uniqueness checks
+
+            // Function to display feedback messages
+            function showTopPicksFeedback(message, isError = false) {
+                topPicksFeedback.textContent = message;
+                topPicksFeedback.classList.remove('hidden');
+                topPicksFeedback.className = `text-center mb-4 ${isError ? 'text-red-400' : 'text-green-400'}`;
+            }
+
+            // Function to render the selectable terms
+            function renderSelectableTerms() {
+                topPicksTermsContainer.innerHTML = ''; // Clear previous terms
+                allTermsData.sort((a, b) => a.term.localeCompare(b.term)).forEach(termData => {
+                    const termWrapper = document.createElement('div');
+                    termWrapper.className = 'flex items-center gap-1 bg-gray-800 rounded-full px-3 py-1 text-sm text-gray-200 border border-gray-600';
+                    termWrapper.dataset.term = termData.term; // Store term name for easy lookup
+
+                    const termSpan = document.createElement('span');
+                    termSpan.textContent = termData.term;
+                    termWrapper.appendChild(termSpan);
+
+                    const selectButton = document.createElement('button');
+                    selectButton.textContent = '+ Add';
+                    selectButton.className = 'ml-2 select-btn';
+                    selectButton.setAttribute('title', `Add "${termData.term}" to your top picks`);
+                    selectButton.onclick = () => addTermToTopPicks(termData.term, termData.definition, selectButton);
+
+                    // Disable button if already selected
+                    if (selectedTopPicks.has(termData.term)) {
+                        selectButton.disabled = true;
+                        selectButton.textContent = 'Added';
+                    }
+                    // Disable if max picks reached and this term is not already selected
+                    if (selectedTopPicks.size >= 10 && !selectedTopPicks.has(termData.term)) {
+                        selectButton.disabled = true;
+                    }
+
+                    termWrapper.appendChild(selectButton);
+                    topPicksTermsContainer.appendChild(termWrapper);
+                });
+            }
+
+            // Function to render the selected top picks
+            function renderSelectedTopPicks() {
+                selectedTopPicksDisplay.innerHTML = ''; // Clear previous display
+                topPicksCountElement.textContent = selectedTopPicks.size;
+
+                if (selectedTopPicks.size === 0) {
+                    const noPicksMessage = document.createElement('p');
+                    noPicksMessage.className = 'text-gray-400 text-center py-4';
+                    noPicksMessage.textContent = 'No terms selected yet.';
+                    selectedTopPicksDisplay.appendChild(noPicksMessage);
+                } else {
+                    selectedTopPicks.forEach(term => {
+                        const termItem = document.createElement('div');
+                        termItem.className = 'term-selection-item';
+
+                        const termText = document.createElement('span');
+                        termText.textContent = term;
+                        termItem.appendChild(termText);
+
+                        const removeButton = document.createElement('button');
+                        removeButton.textContent = 'Remove';
+                        removeButton.className = 'remove-btn ml-4';
+                        removeButton.setAttribute('title', `Remove "${term}" from your top picks`);
+                        removeButton.onclick = () => removeTermFromTopPicks(term, removeButton);
+                        termItem.appendChild(removeButton);
+
+                        selectedTopPicksDisplay.appendChild(termItem);
+                    });
+                }
+                updateAllSelectButtonsState(); // Update all buttons after any change
+            }
+
+            // Function to add a term to top picks
+            function addTermToTopPicks(term, definition, buttonElement) {
+                if (selectedTopPicks.has(term)) {
+                    showTopPicksFeedback(`"${term}" is already in your top picks!`, true);
+                    return;
+                }
+                if (selectedTopPicks.size >= 10) {
+                    showTopPicksFeedback('You can only select up to 10 terms!', true);
+                    return;
+                }
+
+                selectedTopPicks.add(term);
+                renderSelectedTopPicks();
+                buttonElement.disabled = true;
+                buttonElement.textContent = 'Added';
+                showTopPicksFeedback(`"${term}" added to your top picks!`);
+            }
+
+            // Function to remove a term from top picks
+            function removeTermFromTopPicks(term, buttonElement) {
+                selectedTopPicks.delete(term);
+                renderSelectedTopPicks();
+                showTopPicksFeedback(`"${term}" removed from your top picks.`);
+            }
+
+            // Function to update the disabled state of all "Add" buttons
+            function updateAllSelectButtonsState() {
+                const allAddButtons = topPicksTermsContainer.querySelectorAll('.select-btn');
+                allAddButtons.forEach(button => {
+                    const termName = button.parentElement.dataset.term;
+                    if (selectedTopPicks.has(termName)) {
+                        button.disabled = true;
+                        button.textContent = 'Added';
+                    } else if (selectedTopPicks.size >= 10) {
+                        button.disabled = true;
+                        button.textContent = 'Max Reached';
+                    } else {
+                        button.disabled = false;
+                        button.textContent = '+ Add';
+                    }
+                });
+            }
+
+            // Initial render calls
+            renderSelectableTerms();
+            renderSelectedTopPicks();
         }
     </script>
 </body>
